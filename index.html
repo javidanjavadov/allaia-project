@@ -1,0 +1,1243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Allaia</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+    * {
+      box-sizing: border-box;
+      z-index: 0;
+    }
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Roboto, sans-serif;
+      display: flex;
+      flex-direction: column;
+      gap: 403px;
+    }
+    .fa-solid,
+    .fas {
+      font-weight: 600;
+    }
+    .second-header {
+          background: #004dda;
+          height: 72px;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          position: relative;
+          transition: all 0.2s ease-in-out;
+    }
+
+
+
+    .nav-hamburger {
+      display: none;
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      background: transparent;
+      border: none;
+      color: white;
+      font-size: 24px;
+      cursor: pointer;
+      padding: 0 16px;
+      z-index: 5;
+    }
+    .branding {
+      z-index: 4;
+    }
+    .branding img {
+      height: 40px;
+    }
+    .main-nav {
+      display: flex;
+      gap: 24px;
+      height: 100%;
+      align-items: center;
+    }
+    .nav-item {
+      position: relative;
+      height: 100%;
+      display: flex;
+      align-items: center;
+    }
+    .nav-link {
+      background: transparent;
+      border: none;
+      color: white;
+      white-space: nowrap;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      padding: 0 10px;
+      height: 100%;
+      transition: all 0.3s ease-in-out;
+      font-family: Roboto, Arial, Helvetica, sans-serif;
+    }
+    .nav-link.has-children::after {
+      content: "\f078";
+      font-family: "Font Awesome 6 Free";
+      font-weight: 600;
+      margin-left: 6px;
+      font-size: 1em;
+      white-space: nowrap;
+      transition: transform 0.3s ease-in-out;
+      display: inline-block;
+      line-height: 1;
+    }
+    .nav-item.has-children:hover .nav-link.has-children::after {
+      transform: rotate(-180deg);
+    }
+    .submenu {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background: #fff;
+      min-width: 170px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+      z-index: 0;
+      opacity: 0;
+      padding: 8px;
+      transform: translateY(10px);
+      transition: all 0.3s ease-in-out;
+    }
+    .submenu a {
+      display: block;
+      padding: 12px 16px;
+      text-decoration: none;
+      color: #444;
+      font-weight: 100;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 14px;
+      transition: all 0.3s ease-in-out;
+    }
+    .submenu a:hover {
+      background-color: rgba(0,77,218,.05);
+      color: #004dda !important;
+    }
+    .submenu.multi-column {
+      display: flex;
+      gap: 50px;
+      min-width: 1000px;
+      padding: 25px;
+      padding-right: 0;
+      left: -150px;
+      transform-origin: top left;
+      transform: translate(-150px,10px);
+      pointer-events: none;
+      transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+    }
+    .nav-item.has-children:hover .submenu.multi-column {
+      display: flex;
+      opacity: 1;
+      transform: translate(-150px,0);
+      pointer-events: auto;
+    }
+    .submenu-column {
+      flex: 1;
+    }
+    .submenu-column h4 {
+      color: black;
+      margin: 0 0 15px;
+      font-size: 13px;
+      font-weight: 700;
+      padding: 0 16px;
+    }
+    .submenu-column a {
+      padding: 8px 16px;
+      font-size: 13px;
+    }
+    .nav-item.has-children:hover .submenu:not(.multi-column) {
+      display: block;
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .header-contact {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+  white-space: nowrap;
+  position: relative;
+  z-index: 4;
+}
+.header-contact h1,
+.header-contact p {
+  margin: 0;
+  color: white;
+  line-height: 1;
+  font-size: 14px;
+  text-align: right;
+}
+.header-contact h1 {
+  font-weight: 900;
+}
+.header-contact p {
+  font-weight: lighter;
+}
+.header-contact .fa-phone {
+  display: none;
+}
+
+
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 300px;
+      height: 100%;
+      background: #004dda;
+      transform: translateX(-100%);
+      transition: all 0.4s ease-in-out;
+      display: flex;
+      flex-direction: column;
+      padding-top: 88px;
+      z-index: 3;
+    }
+    .sidebar.active {
+      transform: translateX(0);
+      background: #fff;
+    }
+    .sidebar .close-btn {
+      display: none;
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      border: none;
+      font-size: 24px;
+      cursor: pointer;
+      color: #000;
+      z-index: 4;
+    }
+    .sidebar.active .close-btn {
+      display: block;
+    }
+    .sidebar-branding {
+      position: absolute;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    .sidebar-branding img {
+      height: 40px;
+    }
+    .sidebar-nav {
+      display: flex;
+      flex-direction: column;
+      margin-top: 16px;
+    }
+    .sidebar-nav .nav-link {
+      width: 100%;
+      text-align: left;
+      padding: 12px 20px;
+      color: #333;
+      background: transparent;
+      border: none;
+      font-size: 14px;
+      white-space: nowrap;
+      font-weight: 700;
+    }
+    .sidebar-nav .nav-item {
+      width: 100%;
+    }
+    .sidebar-nav .submenu {
+      position: relative;
+      top: 0;
+      left: 0;
+      box-shadow: none;
+      transform: none;
+      padding: 0;
+      display: none;
+      opacity: 1;
+      background: #f9f9f9;
+    }
+    .sidebar-nav .submenu.active {
+      display: flex;
+      flex-direction: column;
+    }
+    .sidebar-nav .submenu a {
+      padding: 10px 30px;
+      color: #444;
+    }
+    .sidebar-nav .submenu a:hover {
+      background: rgba(0,77,218,.05);
+      color: #004dda !important;
+    }
+    @media (max-width: 1024px) {
+
+      .nav-hamburger {
+        display: block;
+      }
+      .main-nav {
+        display: none;
+      }
+      .branding {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+      .header-contact {
+        position: absolute;
+        right: 16px;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+      .header-contact h1,
+      .header-contact p {
+        display: none;
+      }
+      .header-contact .fa-phone {
+        display: block;
+        color: white;
+        font-size: 20px;
+      }
+      .sidebar {
+        top: 0;
+        height: 100%;
+      }
+    }
+    @media (max-width: 600px) {
+      .sidebar {
+        width: 100%;
+      }
+    }
+    .close-btn {
+      background-color: white;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: 'Roboto', sans-serif;
+    }
+    .menu-toggle,
+    .close-btn {
+      background: none;
+      border: none;
+      font-size: 24px;
+      cursor: pointer;
+      color: #fff;
+    }
+    .branding img,
+    .sidebar-header img {
+      height: 40px;
+    }
+    .main-nav {
+      display: flex;
+      gap: 30px;
+    }
+    .nav-item {
+      position: relative;
+    }
+    .nav-link {
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      padding: 0 10px;
+    }
+    .nav-link.has-children::after {
+      content: "\f078";
+      font-family: "Font Awesome 6 Free";
+      font-weight: 900;
+      margin-left: 6px;
+      transition: transform 0.3s;
+    }
+    .nav-link.rotated::after {
+      transform: rotate(-180deg);
+    }
+    .submenu {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background: #fff;
+      min-width: 170px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+      display: none;
+      padding: 8px 0;
+      z-index: 1000;
+    }
+    .submenu.active {
+      display: block;
+    }
+    .submenu a {
+      display: block;
+      padding: 10px 20px;
+      color: #444;
+      text-decoration: none;
+      font-size: 14px;
+    }
+    .submenu a:hover {
+      background: rgba(0,77,218,0.05);
+      color: #004dda;
+    }
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      max-width: 320px;
+      height: 100%;
+      background: #fff;
+      transition: left 0.3s;
+      z-index: 2000;
+      overflow-y: auto;
+    }
+    .sidebar.active {
+      left: 0;
+    }
+    .sidebar-header {
+      padding: 20px;
+      background: #004dda;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+    }
+    .sidebar-content {
+      padding: 20px;
+    }
+    .sidebar .nav-item {
+      margin-bottom: 10px;
+    }
+    .sidebar .nav-link {
+      width: 100%;
+      text-align: left;
+      padding: 10px 0;
+      color: #333;
+      font-size: 14px;
+      font-weight: 700;
+      display: flex;
+      justify-content: space-around;
+    }
+    .sidebar .submenu {
+      position: static;
+      background: #f8f9fa;
+      display: none;
+      padding-left: 20px;
+    }
+    .sidebar .submenu.active {
+      display: block;
+    }
+    .sidebar .submenu a {
+      padding: 8px 0;
+      color: #444;
+    }
+    @media (max-width: 1024px) {
+      .menu-toggle {
+        display: block;
+      }
+      .main-nav {
+        display: none;
+      }
+    }
+    .hamburger-menu {
+  width: 26px;
+  height: 22px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  background: none;
+  border: none;
+  gap: 2px;
+  cursor: pointer;
+}
+.hamburger-menu span {
+  display: block;
+  height: 2px;
+  background-color: #000;
+  transition: background-color 0.3s ease;
+}
+.nav-header-bar {
+  display: flex;
+  width: 100%;
+  height: 60px;
+  align-items: center;
+  justify-content: space-between;
+}
+.menu-text {
+  font-family: Roboto, sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  cursor: pointer;
+  color: #000;
+  transition: color 0.3s ease;
+}
+.hamburger-selection {
+  display: flex;
+  gap: 10px;
+  height: 100%;
+  align-items: center;
+  position: relative;
+}
+.hamburger-selection:hover .hamburger-menu span {
+  background-color: #004dda;
+}
+.lefttt-side {
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  height: 60px;
+  position: relative;
+}
+.lefttt-side:hover .menu-text {
+  color: #004dda;
+}
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #fff;
+  min-width: 300px;
+  border-top: 2px solid #004dda;
+  box-shadow: none;
+}
+.lefttt-side:hover .dropdown-menu {
+  display: block;
+}
+.dropdown-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  z-index: 0;
+}
+
+.dropdown-menu ul li a {
+  text-decoration: none;
+  color: #444;
+  font-family: Roboto, sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding-inline: 10px;
+  box-sizing: border-box;
+  transition: color 0.2s ease;
+}
+.dropdown-menu ul li:hover {
+  background-color: rgba(0, 77, 218, 0.04);
+}
+.dropdown-menu ul li a:hover {
+  color: #004dda;
+}
+.dropdown-menu ul li.has-submenu > a::after {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  content: "›";
+  font-size: 40px;
+  color: transparent;
+  margin-left: 10px;
+  transition: color 0.2s ease;
+  font-weight: 200;
+}
+.dropdown-menu ul li.has-submenu:hover > a::after {
+  color: #004dda;
+}
+.sub-dropdown {
+  display: none;
+  position: absolute;
+  top: 20px;
+  left: 100%;
+  background-color: #fff;
+  height: 288px;
+  width: 100%;
+  z-index: 2;
+  border-left: 1px solid #eee;
+  border-top: 2px solid #004dda;
+  box-shadow: none;
+}
+.sub-dropdown ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.sub-dropdown ul li a {
+  padding: 15px;
+  font-family: Roboto, sans-serif;
+  font-size: 14px;
+  color: #444;
+  text-decoration: none;
+  display: block;
+  transition: color 0.2s ease;
+}
+.sub-dropdown ul li:hover {
+  background-color: rgba(0, 77, 218, 0.04);
+}
+.sub-dropdown ul li a:hover {
+  color: #004dda;
+}
+.dropdown-menu ul li:hover > .sub-dropdown {
+  display: block;
+}
+
+.center-side {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 60px;
+}
+
+.search-bar {
+  position: relative;
+  max-width: 800px;     /* En fazla 800px'e kadar büyüsün */
+  min-width: 400px;     /* Çok küçülmesin */
+  height: 40px;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+.search-bar input {
+  width: 100%;
+  height: 100%;
+  padding: 0 40px 0 10px;
+  border: none;
+  border-radius: 4px;
+  background-color: #f2f2f2;
+  font-family: Roboto, sans-serif;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+.search-bar input:focus {
+  outline: none;
+}
+.search-bar .search-btn {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 40px;
+  height: 100%;
+  border: none;
+  background: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.search-icon {
+  width: 30px;
+  height: 30px;
+}
+.search-btn:hover .search-icon circle,
+.search-btn:hover .search-icon line {
+  stroke: #004dda;
+}
+
+
+.right-side {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  height: 60px;
+}
+
+.icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.user-icon, .favorites-icon, .bag-icon, .search-icon {
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.icon:hover .user-icon,
+.icon:hover .favorites-icon,
+.icon:hover .bag-icon,
+.icon:hover .search-icon {
+  transform: scale(1.1);
+  color: #004dda;
+}
+
+.nav-header-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+
+
+@media (max-width: 1024px) {
+}
+
+@media (max-width: 1024px) {
+  .nav-header-bar {
+    gap: 2vw;
+  }
+}
+
+@media (max-width: 480px) {
+  .nav-header-bar {
+    gap: 1vw;
+  }
+}
+
+
+.main-header {
+  display: flex;
+  flex-direction: column;
+  display: flex;
+      flex-direction: column;
+}
+
+.container {
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+.nav-header-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 60px;
+}
+@media (max-width: 1024px) {
+  .container { padding: 0 10px; }
+}
+
+.containerr {
+  box-sizing: border-box;
+}
+.main-footer {
+  background-color: #222;
+  color: #ddd;
+  padding: 60px 20px 30px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.footer-col h4 {
+  color: #fff;
+  margin-bottom: 15px;
+  font-size: 18px;
+  text-transform: uppercase;
+}
+
+.footer-col ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  z-index: 5;
+}
+
+.footer-col ul li {
+  margin-bottom: 10px;
+  z-index: 5;
+
+}
+
+.footer-col ul li a {
+  color: #aaa;
+  text-decoration: none;
+  position: relative;
+  display: inline-block;
+  z-index: 5;
+  transition: color 0.3s, transform 0.3s;
+}
+
+.footer-col ul li a::after {
+  content: '→';
+  margin-left: 6px;
+  opacity: 0;
+  transform: translateX(0);
+  transition: opacity 0.3s, transform 0.3s;
+  color: #aaa;
+}
+
+.footer-col ul li a:hover {
+  color: #fff;
+  transform: translateX(2px);
+}
+
+.footer-col ul li a:hover::after {
+  opacity: 1;
+  transform: translateX(12px); 
+  color: #fff;
+}
+
+.footer-contact p {
+  margin: 8px 0;
+  color: #bbb;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.footer-contact i {
+  color: #959aa2;
+  font-size: 16px;
+  width: 18px;
+}
+
+.newsletter input[type="email"] {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0 10px;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.newsletter button {
+  background-color: #ff6b6b;
+  color: #fff;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.newsletter button:hover {
+  background-color: #e55e5e;
+}
+
+.social-links {
+  margin-top: 15px;
+}
+
+.social-links a {
+  display: inline-block;
+  margin-right: 10px;
+  color: #aaa;
+  font-size: 18px;
+  transition: color 0.3s;
+}
+
+.social-links a:hover {
+  color: #fff;
+}
+
+.footer-bottom {
+  border-top: 1px solid #444;
+  margin-top: 30px;
+  padding-top: 20px;
+  text-align: center;
+  font-size: 14px;
+  color: #aaa;
+}
+
+.footer-bottom div {
+  margin-top: 5px;
+}
+
+
+.main-header,
+.second-header,
+.containerr {
+  overflow: visible;
+}
+
+.second-header,
+.main-nav {
+  position: relative;
+  z-index: 10;
+}
+.nav-item {
+  position: relative;
+}
+
+.dropdown-menu,
+.sub-dropdown,
+.submenu,
+.submenu.multi-column {
+  position: absolute;
+  z-index: 9999;
+  background-color: #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.dropdown-menu { top: 100%; left: 0; }
+.sub-dropdown { top: 0; left: 100%; }
+
+.submenu { top: 100%; left: 0; display: none; }
+.submenu.multi-column {
+  display: none;
+  width: 600px;
+  grid-template-columns: repeat(3,1fr);
+  display: grid;
+}
+
+.lefttt-side:hover .dropdown-menu,
+.lefttt-side .dropdown-menu:hover {
+  display: block;
+}
+.nav-item.has-children:hover > .submenu {
+  display: block;
+}
+.dropdown-menu ul li.has-submenu:hover > .sub-dropdown {
+  display: block;
+}
+
+.search-bar {
+  position: relative;
+  z-index: 1;
+}
+
+.main-footer {
+  position: relative;
+  z-index: 1;
+}
+
+
+.hamburger-selection {
+  position: relative;
+}
+
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #fff;
+  min-width: 300px;
+  border-top: 2px solid #004dda;
+  box-shadow: none;
+  z-index: 999;
+}
+
+.hamburger-selection:hover > .dropdown-menu,
+.hamburger-selection .dropdown-menu:hover {
+  display: block;
+}
+
+.dropdown-menu ul li.has-submenu {
+  position: relative;
+}
+.dropdown-menu ul li.has-submenu > .sub-dropdown {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 100%;
+  z-index: 9999;
+}
+.dropdown-menu ul li.has-submenu:hover > .sub-dropdown,
+.dropdown-menu ul li.has-submenu .sub-dropdown:hover {
+  display: block;
+}
+
+
+.container,
+.containerr {
+  padding-inline: clamp(50px, 10%, 320px);
+}
+
+.icon .search-icon {
+  display: none;
+}
+@media (max-width: 768px) {
+  .hamburger-menu {
+    display: none;
+  }
+  .search-bar {
+    display: none;
+  }
+
+  .icon .search-icon {
+  display:block
+}
+}
+@media (max-width: 1024px) {
+
+  .nav-header-bar {
+    padding-inline: 12px;
+  }
+  .second-header {
+    padding-inline: 32px;
+  }
+}
+
+
+
+  </style>
+</head>
+<body>
+  <header class="main-header">
+
+    <header class="second-header containerr">
+      <button class="nav-hamburger" aria-label="Toggle navigation">
+        <i class="fas fa-bars"></i>
+      </button>
+      <div class="branding">
+        <img src="https://www.ansonika.com/allaia/img/logo.svg" alt="Logo">
+      </div>
+      <nav class="main-nav">
+        <div class="nav-item has-children">
+          <button class="nav-link has-children">HOME</button>
+          <div class="submenu">
+            <a href="#">Slider</a>
+            <a href="#">Video Background</a>
+            <a href="#">Vertical Slider</a>
+            <a href="#">GDPR Cookie Bar</a>
+          </div>
+        </div>
+        <div class="nav-item has-children">
+          <button class="nav-link has-children">PAGES</button>
+          <div class="submenu multi-column">
+            <div class="submenu-column">
+              <h4>LISTING GRID</h4>
+              <a href="#">Grid Full Width</a>
+              <a href="#">Grid Full Width 2</a>
+              <a href="#">Grid Boxed</a>
+              <a href="#">Grid Sidebar Left</a>
+              <a href="#">Grid Sidebar Right</a>
+              <a href="#">Grid Sidebar Left 2</a>
+              <a href="#">Grid Sidebar Right 2</a>
+            </div>
+            <div class="submenu-column">
+              <h4>LISTING ROW & PRODUCT</h4>
+              <a href="#">Row Sidebar Left</a>
+              <a href="#">Row Sidebar Right</a>
+              <a href="#">Row Sidebar Left 2</a>
+              <a href="#">Row Sidebar Extended</a>
+              <a href="#">Product Large Image</a>
+              <a href="#">Product Carousel</a>
+              <a href="#">Product Sticky Info</a>
+            </div>
+            <div class="submenu-column">
+              <h4>OTHER PAGES</h4>
+              <a href="#">Cart Page</a>
+              <a href="#">Check Out Page</a>
+              <a href="#">Confirm Purchase Page</a>
+              <a href="#">Create Account Page</a>
+              <a href="#">Track Order</a>
+              <a href="#">Help Page</a>
+              <a href="#">Help Page 2</a>
+              <a href="#">Leave a Review</a>
+            </div>
+            <a href="./index.html">
+              <img src="https://www.ansonika.com/allaia/img/banner_menu.jpg" alt="Photo" style="max-width:220px; max-height:300px; display:block;">
+            </a>
+          </div>
+        </div>
+        <div class="nav-item has-children">
+          <button class="nav-link has-children">EXTRA PAGES</button>
+          <div class="submenu">
+            <a href="#">Header Style 2</a>
+            <a href="#">Header Style 3</a>
+            <a href="#">Header Style 4</a>
+            <a href="#">Header Style 5</a>
+            <a href="#">404 Page</a>
+            <a href="#">Sign In Modal</a>
+            <a href="#">Contact Us</a>
+            <a href="#">About 1</a>
+            <a href="#">About 2</a>
+            <a href="#">Modal Advertise</a>
+            <a href="#">Modal Newsletter</a>
+            <a href="#">Gallery Page</a>
+          </div>
+        </div>
+        <div class="nav-item">
+          <button class="nav-link">BLOG</button>
+        </div>
+        <div class="nav-item">
+          <button class="nav-link">BUY TEMPLATE</button>
+        </div>
+      </nav>
+      <div class="header-contact">
+        <h1>Need Help?</h1>
+        <p>+94 423-23-221</p>
+        <i class="fas fa-phone"></i>
+      </div>
+    </header>
+
+    <nav class="nav-header-bar container">
+      <div class="lefttt-side">
+        <div class="hamburger-selection">
+          <button class="hamburger-menu">
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+          <span class="menu-text">CATEGORIES</span>
+          <div class="dropdown-menu">
+            <ul>
+              <li class="has-submenu">
+                <a href="#">Collections</a>
+                <div class="sub-dropdown">
+                  <ul>
+                    <li><a href="#">Trending</a></li>
+                    <li><a href="#">Life style</a></li>
+                    <li><a href="#">Running</a></li>
+                    <li><a href="#">Training</a></li>
+                    <li><a href="#">View all Collections</a></li>
+                  </ul>
+                </div>
+              </li>
+              <li class="has-submenu"><a href="#">Men</a>
+                <div class="sub-dropdown">
+                  <ul>
+                    <li><a href="#">Offers</a></li>
+                    <li><a href="#">Shoes</a></li>
+                    <li><a href="#">Clothing</a></li>
+                    <li><a href="#">Accessories</a></li>
+                    <li><a href="#">Equipment</a></li>
+                  </ul>
+                </div></li>
+              <li class="has-submenu"><a href="#">Women</a>
+                <div class="sub-dropdown">
+                  <ul>
+                    <li><a href="#">Best Sellers</a></li>
+                    <li><a href="#">Clothing</a></li>
+                    <li><a href="#">Running</a></li>
+                    <li><a href="#">Accessories</a></li>
+                    <li><a href="#">Shoes</a></li>
+                  </ul>
+                </div></li>
+              <li class="has-submenu"><a href="#">Boys</a>
+                <div class="sub-dropdown">
+                  <ul>
+                    <li><a href="#">Easy On Shoes</a></li>
+                    <li><a href="#">Clothing</a></li>
+                    <li><a href="#">Must Have</a></li>
+                    <li><a href="#">All Boys</a></li>
+                  </ul>
+                </div></li>
+              <li class="has-submenu"><a href="#">Girls</a>
+                <div class="sub-dropdown">
+                  <ul>
+                    <li><a href="#">New Releases</a></li>
+                    <li><a href="#">Clothing</a></li>
+                    <li><a href="#">Sale</a></li>
+                    <li><a href="#">Best Sellers</a></li>
+                  </ul>
+                </div></li>
+              <li class="has-submenu"><a href="#">Customize</a>
+                <div class="sub-dropdown">
+                  <ul>
+                    <li><a href="#">For Men</a></li>
+                    <li><a href="#">For Women</a></li>
+                    <li><a href="#">For Boys</a></li>
+                    <li><a href="#">For Girls</a></li>
+                  </ul>
+                </div></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="center-side">
+        <div class="search-bar">
+          <input type="text" placeholder="Search over 10.000 products">
+          <button class="search-btn">
+            <svg class="search-icon" viewBox="0 0 24 24">
+              <circle cx="11" cy="11" r="7" stroke="#444" stroke-width="1.5" fill="none"/>
+              <line x1="16" y1="16" x2="21" y2="21" stroke="#444" stroke-width="1.5"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+<div class="right-side">
+  <div class="icon">
+    <svg class="search-icon" viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" fill="none" stroke-width="1.5">
+      <circle cx="11" cy="11" r="7"/>
+      <line x1="16" y1="16" x2="21" y2="21"/>
+    </svg>
+  </div>
+
+  <div class="icon">
+    <svg class="user-icon" viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" fill="none" stroke-width="1.5">
+      <circle cx="12" cy="8" r="4"/>
+      <path d="M6 19c0-4 12-4 12 0"/>
+    </svg>
+  </div>
+
+  <div class="icon">
+    <svg class="favorites-icon" viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" fill="none" stroke-width="1.5">
+      <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+    </svg>
+  </div>
+
+  <div class="icon">
+    <svg class="bag-icon" viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" fill="none" stroke-width="1.5">
+      <path d="M20 6H4c-1.1 0-1.99.9-1.99 2L2 20c0 1.1.89 2 1.99 2H20c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-6 12H10v-6h4v6zm2-8H8V6h8v4z"/>
+    </svg>
+  </div>
+</div>
+
+      
+    </nav>
+  </header>
+  <footer class="main-footer">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="#">About us</a></li>
+          <li><a href="#">Faq</a></li>
+          <li><a href="#">Help</a></li>
+          <li><a href="#">My account</a></li>
+          <li><a href="#">Blog</a></li>
+          <li><a href="#">Contacts</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Categories</h4>
+        <ul>
+          <li><a href="#">Clothes</a></li>
+          <li><a href="#">Electronics</a></li>
+          <li><a href="#">Furniture</a></li>
+          <li><a href="#">Glasses</a></li>
+          <li><a href="#">Shoes</a></li>
+          <li><a href="#">Watches</a></li>
+        </ul>
+      </div>
+      <div class="footer-col footer-contact">
+        <h4>Contacts</h4>
+        <p><i class="fa-regular fa-envelope"></i>97845 Baker st. 567<br> Los Angeles - US</p>
+        <p><i class="fa-regular fa-envelope" style="color: #959aa2;"></i> +94 423-23-221</p>
+        <p><i class="fa-regular fa-envelope"></i>info@allaia.com</p>
+      </div>
+      <div class="footer-col newsletter">
+        <h4>Keep in touch</h4>
+        <input type="email" placeholder="Your email">
+        <button>Subscribe</button>
+        <div class="social-links">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>English</span> &nbsp; | &nbsp; <span>US Dollars</span>
+      <div>Terms and conditions &nbsp; Privacy &nbsp; © 2024 Allaia</div>
+    </div>
+  </footer>
+</body>
+</html>
